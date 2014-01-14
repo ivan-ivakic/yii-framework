@@ -26,4 +26,24 @@ require(dirname(__FILE__).'/YiiBase.php');
  */
 class Yii extends YiiBase
 {
+  public static function createWebApplication($config=null)
+  {
+    return parent::createApplication('CWebApplicationCustom',$config);
+  }
+}
+//quickfix for error page display
+class CWebApplicationCustom extends CWebApplication
+{
+
+  public function runController($route)
+  {
+    try {
+      parent::runController($route);
+    } catch (Exception $e) {
+      header("Status: 404 Not Found");
+      header('HTTP/1.0 404 Not Found');
+      parent::runController('/chupa/error');
+    }
+
+  }
 }
