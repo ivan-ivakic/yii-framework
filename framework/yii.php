@@ -40,8 +40,6 @@ class CWebApplicationCustom extends CWebApplication
     try {
       parent::runController($route);
     } catch (Exception $e) {
-      header("Status: 404 Not Found");
-      header('HTTP/1.0 404 Not Found');
       parent::runController('/chupa/error');
     }
 
